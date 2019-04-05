@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 import {Toolbar, AppBar, IconButton, Typography, Button} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 

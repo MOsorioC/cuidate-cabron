@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import Core, {Grid} from '@material-ui/core'
 import {Switch, Route} from 'react-router-dom'
 import NavBar from './components/NavBar'
-
-import Map from './components/Map'
+import NotFound from './components/NotFound'
+import Album from './components/Album';
+import HomePage from './components/HomePage';
+import {LoginPage, SignUp} from './components/Auth'
 
 class App extends Component {
 
@@ -11,7 +12,12 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar></NavBar>
-        <Map/>
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route exact path='/login' component={LoginPage} />
+          <Route exact path='/signup' component={SignUp} />
+          <Route component={NotFound}/>
+        </Switch>
       </div>
     );
   }

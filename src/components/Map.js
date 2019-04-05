@@ -31,7 +31,7 @@ class Map extends Component {
       <ReactMapGL
         mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX_KEY}
         {...this.state.viewport}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
+        mapStyle="mapbox://styles/mapbox/streets-v10"
         onViewportChange={(viewport) => this.setState({ viewport })}
       >
         <div className="nav" style={navStyle}>
