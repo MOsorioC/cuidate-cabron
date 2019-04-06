@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Map from './Map'
+import HeatMap from './Maps/HeatMap'
 
 const styles = theme => ({
   appBar: {
@@ -64,8 +64,6 @@ function signupPage(){
   window.location.href = "/signup"
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
 function HomePage(props) {
   const { classes } = props;
 
@@ -104,7 +102,7 @@ function HomePage(props) {
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Visualiza la zonas más inseguras del pais
             </Typography>
-            <Map/>
+            <HeatMap/>
           </Grid>
         </div>
       </main>

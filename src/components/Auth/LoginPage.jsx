@@ -1,10 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {Fragment} from 'react';
+import { withStyles, Grid, TextField, Button, Card, LinearProgress, Typography } from '@material-ui/core'
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
+import { userActions } from '../../actions/user.actions'
 
-import { userActions } from '../../actions/user.actions';
-
-import LinearProgress from '@material-ui/core/LinearProgress'
+const styles = theme => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        padding: 50
+    },
+    textField: {
+        width: '100%',
+    },
+    button: {
+        marginTop: 16,
+        width: '100%'
+    },
+    card: {
+        width: '60%',
+        padding: 20,
+    }
+});
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -19,9 +36,10 @@ class LoginPage extends React.Component {
         };
     }
 
-    handleChange = (e) => {
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
+    handleChange = name => (e) => {
+        /*const { name, value } = e.target;
+        this.setState({ [name]: value });*/
+        this.setState({ [name]: e.target.value });
     }
 
     handleSubmit = (e) => {
@@ -36,44 +54,81 @@ class LoginPage extends React.Component {
     }
 
     render() {
-        const { email, password, submitted } = this.state;
         const { loggingIn, loggingError, error } = this.props
 
+        const { classes } = this.props;
 
         let errorMessage;
+
         if(loggingError) {
             errorMessage = <div>{error.message}</div>
         }
+
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <Fragment>
                 {loggingIn &&
                 <LinearProgress color="secondary"/>}
-                <h2>Login</h2>
-                <form name="form" onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
-                        <label htmlFor="email">Email</label>
-                        <input type="text" className="form-control" name="email" value={email} onChange={this.handleChange} />
-                        {submitted && !email &&
-                            <div className="help-block">Email is required</div>
-                        }
-                    </div>
-                    <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
-                        {submitted && !password &&
-                            <div className="help-block">Password is required</div>
-                        }
-                    </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary">Login</button>
-                    </div>
-                    {errorMessage}
+                <form name="form" onSubmit={this.handleSubmit} className={classes.container}>
+                    
+                    <Grid container spacing={8} justify="center" alignItems="center">
+                        <Card className={classes.card}>
+                            <Typography variant="h3" align="center" color="textSecondary" paragraph>
+                                Inicia Sesión
+                            </Typography>
+                            <Grid item xs={12}>
+                                <Grid container spacing={8} alignItems="center" justify="center">
+                                    <Grid item lg={5}>
+                                        <TextField
+                                            required
+                                            id="email"
+                                            label="Email"
+                                            value={this.state.email}
+                                            className={classes.textField}
+                                            onChange={this.handleChange('email')}
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid container spacing={8} alignItems="center" justify="center">
+                                    <Grid item lg={5}>
+                                        <TextField
+                                            required
+                                            id="password"
+                                            label="Password"
+                                            value={this.state.password}
+                                            className={classes.textField}
+                                            onChange={this.handleChange('password')}
+                                            type="password"
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid container alignItems="center" justify="center">
+                                    <Grid item lg={6}>
+                                        <Button variant="contained" color="primary" className={classes.button} type="submit">
+                                            Crear nueva cuenta
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                                {errorMessage}
+                            </Grid>
+                        </Card>
+                    </Grid>
+
                 </form>
                 
-            </div>
+            </Fragment>
         );
     }
 }
+
+LoginPage.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+const LoginPages = withStyles(styles)(LoginPage)
 
 
 function mapStateToProps(state) {
@@ -85,5 +140,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(LoginPage);
+const connectedLoginPage = connect(mapStateToProps)(LoginPages);
 export { connectedLoginPage as LoginPage };

@@ -2,7 +2,7 @@ import React, {Fragment, Component} from 'react'
 import PropTypes from 'prop-types'
 import {Grid, withStyles, Button} from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
-import {Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 import dead_link from '../img/dead_link.png'
 
@@ -15,14 +15,23 @@ const styles = {
 class NotFound extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      goBackSubmited: false
+    }
   }
 
   goBack = () => {
-    window.history.back()
+    this.setState({goBackSubmited: true})
   }
 
   render() {
     const { classes } = this.props
+    const { goBackSubmited } = this.state
+
+    if (goBackSubmited){
+      return <Redirect to='/' />;
+    }
 
     return (
       <Fragment>

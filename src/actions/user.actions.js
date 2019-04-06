@@ -7,6 +7,7 @@ function login(email, password) {
 
     UserService.login(email, password)
       .then(user => {
+        localStorage.setItem('user', JSON.stringify(user.user));
         dispatch(success(user));
       }
       ).catch(err => {

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Switch, Route} from 'react-router-dom'
 import NavBar from './components/NavBar'
 import NotFound from './components/NotFound'
-import Album from './components/Album';
 import HomePage from './components/HomePage';
 import {LoginPage, SignUp} from './components/Auth'
 

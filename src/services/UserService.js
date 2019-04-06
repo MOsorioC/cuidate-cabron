@@ -1,5 +1,3 @@
-import { authHeader } from '../helpers'
-
 function login(email, password) {
   const requestOptions = {
     method: 'POST',
@@ -8,8 +6,6 @@ function login(email, password) {
   };
 
   return fetch(`${process.env.REACT_APP_API_URL}/login`, requestOptions).then(handleResponse).then( user => {
-    localStorage.setItem('user', JSON.stringify(user));
-
     return user;
   })
 
