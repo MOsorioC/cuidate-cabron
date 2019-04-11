@@ -1,9 +1,11 @@
 import React, {Component, Fragment} from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, Grid, TextField, Button, Card, LinearProgress } from '@material-ui/core'
+import { withStyles, Grid, TextField, Button, Card, LinearProgress, Typography } from '@material-ui/core'
 import { userActions } from '../../actions/user.actions'
 import { connect } from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import { userConstants } from '../../constants'
+import MySnackbarContent from '../MySnackbarContent'
 
 const styles = theme => ({
   container: {
@@ -45,12 +47,63 @@ class SignUp extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     
-    const { email, password, apellido, nombre } = this.state;
+    const { email, password, apellido, nombre, passwordConfirm } = this.state;
 
     const { dispatch } = this.props;
 
     //TODO: aun falta hacer validaciones
+    //hacemos las validaciones
+    if (!nombre || nombre.length < 4) {
+      dispatch(userActions.errorMessage("Nombre requerido", userConstants.SIGNUP_FAILURE))
+      return
+    }
+
+    if (!apellido || apellido.length < 4) {
+      dispatch(userActions.errorMessage("Apellido requerido", userConstants.SIGNUP_FAILURE))
+      return
+    }
+
+    if (!this.validateEmail(email)) {
+      dispatch(userActions.errorMessage("Email no válido", userConstants.SIGNUP_FAILURE))
+      return
+    }
+
+    if (password !== passwordConfirm) {
+      dispatch(userActions.errorMessage("Las contraseñas no coinciden", userConstants.SIGNUP_FAILURE))
+      return
+    }
+
+    if (!this.validatePassword(password)) {
+      dispatch(userActions.errorMessage("La ccontraseña no cumple con las reglas de seguridad básicas", userConstants.SIGNUP_FAILURE))
+      return
+    }
+
     dispatch(userActions.signup(nombre, apellido, email, password))
+  }
+
+  validateEmail = (email) => {
+    var reg = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    return reg.test(String(email).toLowerCase());
+  }
+
+  validatePassword = (password) => {
+    var reg = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/);
+    return reg.test(password)
+  }
+
+  _renderMessage = () => {
+    
+    const { classes,
+      signupError,
+      error} = this.props
+
+    const variantMessage = signupError ? 'error' : null
+
+    return variantMessage && <MySnackbarContent
+      variant={variantMessage}
+      className={classes.margin}
+      message={error.message}
+    />
   }
 
 
@@ -70,6 +123,9 @@ class SignUp extends Component {
         <form autoComplete="off" onSubmit={this.handleSubmit} className={classes.container}>
           <Grid container spacing={8} justify="center" alignItems="center">
             <Card className={classes.card}>
+              <Typography variant="h3" align="center" color="textSecondary" paragraph>
+                Regístrate
+              </Typography>
               <Grid item xs={12}>
                 <Grid container spacing={8} alignItems="center" justify="center">
                   <Grid item lg={5}>
@@ -149,6 +205,7 @@ class SignUp extends Component {
               </Grid>
             </Card>
           </Grid>
+          {this._renderMessage()}
         </form>
       </Fragment>
     )

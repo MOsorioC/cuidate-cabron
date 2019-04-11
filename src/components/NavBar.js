@@ -64,7 +64,7 @@ class NavBar extends Component {
   }
 
   _goToNewReport = () => {
-    window.location = '/user/dashboard/user/dashboard/new-report'
+    window.location = '/user/dashboard/new-report'
   }
 
 

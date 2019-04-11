@@ -43,8 +43,14 @@ function signup(nombre, apellido, email, password) {
   function failure(error) { return { type: userConstants.SIGNUP_FAILURE, error } }
 }
 
+function errorMessage(message, typeError) {
+  const error = { success: false, message: message }
+  return { type: typeError, error }
+}
+
 export const userActions = {
   login,
   logout,
-  signup
+  signup,
+  errorMessage
 };

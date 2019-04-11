@@ -7,6 +7,7 @@ import {LoginPage, SignUp} from './components/Auth'
 import {PrivateRoute} from './components/PrivateRoute'
 import {IndexPage} from './components/DashBoard/IndexPage'
 import {NewReport} from './components/DashBoard/NewReport'
+import ReportList from './components/DashBoard/ReportList'
 
 class App extends Component {
 
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path='/signup' component={SignUp} />
           <PrivateRoute exact path="/user/dashboard" component={IndexPage} />
           <PrivateRoute exact path="/user/dashboard/new-report" component={NewReport} />
+          <PrivateRoute exact path="/user/dashboard/my-reports" component={ReportList} />
           <Route component={NotFound}/>
         </Switch>
       </div>
