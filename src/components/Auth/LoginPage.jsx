@@ -3,6 +3,7 @@ import { withStyles, Grid, TextField, Button, Card, LinearProgress, Typography }
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { userActions } from '../../actions/user.actions'
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
     container: {
@@ -54,11 +55,15 @@ class LoginPage extends React.Component {
     }
 
     render() {
-        const { loggingIn, loggingError, error } = this.props
+        const { loggingIn, loggingError, error, loggedIn } = this.props
 
         const { classes } = this.props;
 
         let errorMessage;
+
+        if (loggedIn) {
+            return <Redirect to='/user/dashboard' />;
+        }
 
         if(loggingError) {
             errorMessage = <div>{error.message}</div>
@@ -132,10 +137,11 @@ const LoginPages = withStyles(styles)(LoginPage)
 
 
 function mapStateToProps(state) {
-    const { loggingIn, loggingError, error } = state.authentication;
+    const { loggingIn, loggingError, error, loggedIn } = state.authentication;
     return {
         loggingIn,
         loggingError,
+        loggedIn,
         error
     };
 }

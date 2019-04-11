@@ -18,6 +18,21 @@ class ConnectionService {
       })
   }
 
+  getExternalUrl = (path) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: authHeader()
+    }
+
+    return fetch(path, requestOptions)
+      .then(this.handleResponse)
+      .then(response => {
+        return response
+      })
+  }
+
+
+
   post = (path, data) => {
     const requestOptions = {
       method: 'POST',
