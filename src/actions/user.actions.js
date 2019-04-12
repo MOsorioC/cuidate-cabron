@@ -12,7 +12,6 @@ function login(email, password) {
       }
       ).catch(err => {
         dispatch(failure(err));
-        //console.log(err)
       })
   };
 

@@ -51,7 +51,6 @@ class SignUp extends Component {
 
     const { dispatch } = this.props;
 
-    //TODO: aun falta hacer validaciones
     //hacemos las validaciones
     if (!nombre || nombre.length < 4) {
       dispatch(userActions.errorMessage("Nombre requerido", userConstants.SIGNUP_FAILURE))

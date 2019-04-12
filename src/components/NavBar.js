@@ -13,7 +13,7 @@ import { userActions } from '../actions/'
 
 const styles = {
   root: {
-    flexGrow: 1,
+    display: 'flex'
   },
   grow: {
     flexGrow: 1,
@@ -114,7 +114,7 @@ class NavBar extends Component {
     );
 
     return(
-      <React.Fragment>
+      <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             {localStorage.getItem('user') && (<IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer('left', true)}>
@@ -140,7 +140,7 @@ class NavBar extends Component {
             {sideList}
           </div>
         </SwipeableDrawer>
-      </React.Fragment>
+      </div>
     )
   }
 }

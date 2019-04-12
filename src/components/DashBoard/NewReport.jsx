@@ -356,6 +356,5 @@ function mapStateToProps(state) {
   };
 }
 
-//export default connect(mapStateToProps)(NewReports)
 const connectedReportPage = connect(mapStateToProps)(NewReports)
 export {connectedReportPage as NewReport}

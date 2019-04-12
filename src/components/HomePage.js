@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import HeatMap from './Maps/HeatMap'
 
+import Image from '../img/header-map.jpg'
+
+
 const styles = theme => ({
   appBar: {
     position: 'relative',
@@ -16,15 +19,16 @@ const styles = theme => ({
     marginRight: theme.spacing.unit * 2,
   },
   heroUnit: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundImage: `url(${Image})`,
+    height: 400,
   },
   heroContent: {
-    maxWidth: 900,
+    maxWidth: '90%',
     margin: '0 auto',
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
   },
   heroButtons: {
-    marginTop: theme.spacing.unit * 4,
+    marginTop: theme.spacing.unit * 10,
   },
   layout: {
     width: 'auto',
@@ -71,24 +75,23 @@ function HomePage(props) {
     <React.Fragment>
       <CssBaseline />
       <main>
-        {/* Hero unit */}
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
-            <Typography variant="h3" align="center" color="textSecondary" paragraph>
-              No sabemos cuando será nuestra última fotografía o nuestra última sonrisa, así que:
+            <Typography variant="h3" align="left">
+              CUIDATE CABRON
             </Typography>
-            <Typography variant="h3" align="center">
-            CUIDATE CABRON
+            <Typography variant="h5" align="left" color="textSecondary" paragraph>
+              No sabemos cuando será nuestra última fotografía o nuestra última sonrisa.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary" onClick={signupPage}>
+                  <Button variant="contained" size="large" color="secondary" onClick={signupPage}>
                     Registrarme
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary" onClick={loginPage}>
+                  <Button variant="outlined" size="large" color="secondary" onClick={loginPage}>
                     Ya tengo una cuenta
                   </Button>
                 </Grid>
@@ -97,10 +100,9 @@ function HomePage(props) {
           </div>
         </div>
         <div className={classNames(classes.layout, classes.cardGrid)}>
-          {/* End hero unit */}
           <Grid container spacing={40}>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Visualiza la zonas más inseguras del pais
+              Localiza la zonas más inseguras del pais
             </Typography>
             <HeatMap />
           </Grid>
@@ -111,7 +113,7 @@ function HomePage(props) {
           Cuidate Cabron
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Por que la vida no al tenemos comprada!
+          Por que la vida no la tenemos comprada!
         </Typography>
       </footer>
     </React.Fragment>

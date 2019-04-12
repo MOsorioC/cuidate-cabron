@@ -8,8 +8,6 @@ function login(email, password) {
   return fetch(`${process.env.REACT_APP_API_URL}/login`, requestOptions).then(handleResponse).then( user => {
     return user;
   })
-
-  //.catch(err => console.log(err))
 }
 
 function logout() {

@@ -141,8 +141,6 @@ class IndexPage extends Component {
   }
 
   render() {
-    //const {classes, user} = this.props
-
     const {loading} = this.state
     return (
       <Fragment>
