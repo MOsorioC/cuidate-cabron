@@ -8,11 +8,21 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
+import Fab from '@material-ui/core/Fab'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import FolderIcon from '@material-ui/icons/Folder'
 import DeleteIcon from '@material-ui/icons/Delete'
+import Divider from '@material-ui/core/Divider'
+import PlaceIcon from '@material-ui/icons/Place'
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import Button from '@material-ui/core/Button';
+import LinearProgress from '@material-ui/core/LinearProgress'
+import MySnackbarContent from '../MySnackbarContent'
 
 const styles = theme => ({
   root: {
@@ -27,16 +37,29 @@ const styles = theme => ({
   title: {
     margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
   },
+  fabButton: {
+    margin: theme.spacing.unit
+  },
+  listItem: {
+    margin: theme.spacing.unit * 2
+  }
 });
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
 class ReportList extends Component {
   state = {
     myReportList: [],
-    error: false,
+    err: false,
     success: false,
     message: '',
     dense: false,
     secondary: false,
+    open: false,
+    reportSelected: null,
+    key: null
   }
 
   _getReportList = () => {
@@ -51,40 +74,126 @@ class ReportList extends Component {
     })
   }
 
-  componentWillMount = () => {
+  _onClickDeleteReport = () => {
+    //obtenemos el valor en la lista
+    const { reportSelected} = this.state
+
+    if (reportSelected) {
+      ReportServices.delete(reportSelected._id).then(response => {
+        console.log(response)
+        if (response.success) {
+          const tempList = this.state.myReportList
+
+          tempList.splice(this.state.key, 1)
+
+          this.setState({ err: false, message: 'Reporte eliminado', success: true, myReportList: tempList, reportSelected: null, key: null})
+        } else {
+          this.setState({ err: true, message: response.message, success: false, reportSelected: null, key: null })
+        }
+      }).catch(err => {
+        this.setState({ err: true, message: err.message, success: false, reportSelected: null, key: null })
+      })
+    }
+  }
+
+  _onShowModalReport = (e, key) => {
+    //obtenemos el valor en la lista
+    const report = this.state.myReportList[key]
+
+    if (report) {
+      this.setState({open: true, reportSelected: report, key: key})
+    }
+  }
+
+  _onClickShowReport = (e, key) => {
+
+  }
+
+  _handleClose = () => {
+    this.setState({ open: false , reportSelected: null});
+  };
+
+  _renderMessage = () => {
+    const { classes } = this.props
+
+    const variantMessage = this.state.err ? 'error' : this.state.success ? 'success' : null
+
+    return (variantMessage && this.state.message)&& <MySnackbarContent
+      variant={variantMessage}
+      className={classes.margin}
+      message={this.state.message}
+      onClose={() => this.setState({ err: false, message: "", success: true })}
+    />
+  }
+
+  _renderDialog() {
+    const {reportSelected} = this.state
+
+    return reportSelected && (<Dialog
+      open={this.state.open}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={this._handleClose}
+      aria-labelledby="alert-dialog-slide-title"
+      aria-describedby="alert-dialog-slide-description"
+    >
+      <DialogTitle id="alert-dialog-slide-title">
+        {`Eliminar este reporte? ${this.state.reportSelected.colonia}`}
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-slide-description">
+          Una vez eliminado no se podra recuperar <br /> ¿Continuar?  
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={this._onClickDeleteReport} color="secondary">
+          Eliminar
+        </Button>
+      </DialogActions>
+    </Dialog>)
+  }
+
+  componentWillMount = (e) => {
     this._getReportList()
   }
 
   _renderReportList = () => {
     const { success, myReportList } = this.state
+    const {classes} = this.props
 
     return success && (myReportList.map((report, key) => {
       return (
-          <ListItem button key={key}>
+        <div key={key}>
+          <ListItem button key={key} className={classes.listItem} onClick={event => this._onClickShowReport(event, key)}>
             <ListItemAvatar>
               <Avatar>
-                <FolderIcon />
+                <PlaceIcon />
               </Avatar>
             </ListItemAvatar>
             <ListItemText
               primary={report.colonia}
               secondary={report.descripcion}
             />
-            <ListItemSecondaryAction>
-              <IconButton aria-label="Delete">
+            <ListItemSecondaryAction onClick={event => this._onShowModalReport(event, key)}>
+              <Fab color="secondary" aria-label="Delete" className={classes.fabButton}>
                 <DeleteIcon />
-              </IconButton>
+              </Fab>
             </ListItemSecondaryAction>
           </ListItem>
+          <Divider light />
+        </div>
       )
     }))
   }
 
   render() {
     const { classes } = this.props;
+    const { reportSelected } = this.state
 
     return (
       <Fragment>
+        {reportSelected &&
+          <LinearProgress color="secondary" />}
         <div className={classes.root}>
           <Grid container spacing={16} alignContent='center' alignItems='center' justify='center'>
             <Grid item xs={12} md={8}>
@@ -100,6 +209,8 @@ class ReportList extends Component {
               </div>
             </Grid>
           </Grid>
+          {this._renderDialog()}
+          {this._renderMessage()}
         </div>
       </Fragment>
     )

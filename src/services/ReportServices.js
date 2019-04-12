@@ -24,6 +24,12 @@ class ReportServices {
     return connectionService.get(endPoint)
   }
 
+  delete = (id) => {
+    const endPoint = '/reports/'
+
+    return connectionService.delete(endPoint, { reportId: id })
+  }
+
 }
 
 
