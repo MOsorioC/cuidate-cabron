@@ -183,13 +183,13 @@ class NewReport extends Component {
       fechaReporte: `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`,
       anio: date.getFullYear,
       mapFeature: {
-        country: this.state.features[5].text,
-        region: this.state.features[4].text,
-        postCode: this.state.features[2].text,
-        district: "",
-        place: this.state.features[3].text,
-        locality: this.state.features[1].text,
-        address: this.state.features[0].text,
+        country: '',
+        region: '',
+        postCode: '',
+        district: '',
+        place: '',
+        locality: '',
+        address: this.state.features[0].place_name,
         geometry: {
           lat: this.state.lat,
           long: this.state.lng
@@ -197,6 +197,34 @@ class NewReport extends Component {
       },
       crimeCategoryId: this.state.crimeSelected
     }
+
+    //RECORREMOS LOS FEATURES
+    this.state.features.forEach(feature => {
+      
+      switch(feature.place_type[0]) {
+        case 'country': 
+          data.mapFeature.country = feature.text
+          break;
+        case 'region':
+          data.mapFeature.region = feature.text
+          break;
+        case 'place':
+          data.mapFeature.place = feature.text
+          break;
+        case 'locality':
+          data.mapFeature.locality = feature.text
+          break;
+        case 'address':
+          data.mapFeature.address = feature.place_name
+          break;
+        case 'postcode':
+          data.mapFeature.postCode = feature.text
+          break;
+        default:
+          break;
+      }
+    })
+
     //hacemos el request 
     ReportServices.sendReport(data).then(response => {
       this.setState({ 
