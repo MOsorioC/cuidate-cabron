@@ -73,7 +73,7 @@ class SignUp extends Component {
     }
 
     if (!this.validatePassword(password)) {
-      dispatch(userActions.errorMessage("La ccontraseña no cumple con las reglas de seguridad básicas", userConstants.SIGNUP_FAILURE))
+      dispatch(userActions.errorMessage("La contraseña no cumple con las reglas de seguridad básicas", userConstants.SIGNUP_FAILURE))
       return
     }
 

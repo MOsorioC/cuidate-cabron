@@ -9,6 +9,7 @@ import {IndexPage} from './components/DashBoard/IndexPage'
 import {NewReport} from './components/DashBoard/NewReport'
 import { UpdateReport } from './components/DashBoard/UpdateReport'
 import ReportList from './components/DashBoard/ReportList'
+import { Profile } from './components/DashBoard/Profile';
 
 class App extends Component {
 
@@ -21,6 +22,7 @@ class App extends Component {
           <Route exact path='/login' component={LoginPage} />
           <Route exact path='/signup' component={SignUp} />
           <PrivateRoute exact path="/user/dashboard" component={IndexPage} />
+          <PrivateRoute exact path="/user/dashboard/profile" component={Profile} />
           <PrivateRoute exact path="/user/dashboard/new-report" component={NewReport} />
           <PrivateRoute exact path="/user/dashboard/my-reports" component={ReportList} />
           <PrivateRoute exact path="/user/dashboard/update-report/:id" component={UpdateReport} />

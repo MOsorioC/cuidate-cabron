@@ -76,7 +76,7 @@ class NavBar extends Component {
       <div className={classes.list}>
         <List>
           <ListItem>
-            <ListItemText primary={`Hola ${user.nombre}`} />
+            <ListItemText primary={`Hola, ${user.nombre ? user.nombre: 'Bienvenido'}`} />
           </ListItem>
           <ListItem button onClick={this._goToProfile}>
             <ListItemIcon>
