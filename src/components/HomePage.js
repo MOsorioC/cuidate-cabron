@@ -102,7 +102,7 @@ function HomePage(props) {
         <div className={classNames(classes.layout, classes.cardGrid)}>
           <Grid container spacing={40}>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Localiza la zonas más inseguras del pais
+              Localiza la zonas más inseguras del país
             </Typography>
             <HeatMap />
           </Grid>
