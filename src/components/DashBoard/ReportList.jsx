@@ -106,7 +106,11 @@ class ReportList extends Component {
   }
 
   _onClickShowReport = (e, key) => {
+    const report = this.state.myReportList[key]
 
+    if (report) {
+      window.location = `/user/dashboard/update-report/${report._id}`
+    }
   }
 
   _handleClose = () => {

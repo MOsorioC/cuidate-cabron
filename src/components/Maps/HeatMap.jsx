@@ -19,10 +19,10 @@ class HeatMap extends Component {
     this.state = {
       viewport: {
         width: "100%",
-        height: 400,
+        height: 500,
         latitude: 19.421949,
         longitude: -99.134391,
-        zoom: 5,
+        zoom: 4,
         bearing: 0,
         pitch: 0
       },

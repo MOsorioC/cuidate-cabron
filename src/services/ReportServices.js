@@ -30,6 +30,18 @@ class ReportServices {
     return connectionService.delete(endPoint, { reportId: id })
   }
 
+  getReport = (id) => {
+    const endPoint = `/reports/id/${id}`
+
+    return connectionService.get(endPoint)
+  }
+
+  update = (data) => {
+    const endPoint = '/reports/'
+
+    return connectionService.put(endPoint, data)
+  }
+
 }
 
 

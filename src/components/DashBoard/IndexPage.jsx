@@ -41,7 +41,7 @@ class IndexPage extends Component {
       height: 500,
       latitude: 19.421949,
       longitude: -99.134391,
-      zoom: 5,
+      zoom: 4,
     },
     error: false,
     errorMessage: "",

@@ -20,7 +20,7 @@ const styles = theme => ({
   },
   heroUnit: {
     backgroundImage: `url(${Image})`,
-    height: 400,
+    height: 450,
   },
   heroContent: {
     maxWidth: '90%',
