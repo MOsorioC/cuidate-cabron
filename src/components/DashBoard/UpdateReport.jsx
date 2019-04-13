@@ -265,8 +265,6 @@ class UpdateReport extends Component {
     //hacemos el request 
     ReportServices.update(data).then(response => {
 
-      console.log(response)
-
       this.setState({ 
         error: false,
         errorMessage: "Reporte enviado con exito, gracias ;)",

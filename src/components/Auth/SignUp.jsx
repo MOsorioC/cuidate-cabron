@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, Grid, TextField, Button, Card, LinearProgress, Typography } from '@material-ui/core'
+import { withStyles, Grid, TextField, Button, LinearProgress, Typography } from '@material-ui/core'
 import { userActions } from '../../actions/user.actions'
 import { connect } from 'react-redux'
 import { userConstants } from '../../constants'
@@ -209,8 +209,8 @@ class SignUp extends Component {
                     </Button>
                   </Grid>
                   <Grid item lg={12} xs={12}>
-                    <Link to={'/signup'}>
-                      <Typography variant="h7" align="center" color="primary" paragraph>
+                    <Link to={'/login'}>
+                      <Typography variant="h6" align="center" color="primary" paragraph>
                         ¿tienes una cuenta? inicia sesión
                       </Typography>
                     </Link>

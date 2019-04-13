@@ -141,7 +141,7 @@ class LoginPage extends React.Component {
                                 </Grid>
                                 <Grid item lg={12} xs={12}>
                                     <Link to={'/signup'}>
-                                        <Typography variant="h7" align="center" color="primary" paragraph>
+                                        <Typography variant="h6" align="center" color="primary" paragraph>
                                             ¿no tienes cuenta? regístrate
                                         </Typography>
                                     </Link>

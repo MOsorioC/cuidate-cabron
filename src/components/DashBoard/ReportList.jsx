@@ -80,7 +80,7 @@ class ReportList extends Component {
 
     if (reportSelected) {
       ReportServices.delete(reportSelected._id).then(response => {
-        console.log(response)
+        
         if (response.success) {
           const tempList = this.state.myReportList
 

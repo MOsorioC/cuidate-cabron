@@ -72,7 +72,7 @@ class Profile extends Component {
 
   componentDidMount = () => {
     const { user } = this.props
-    console.log(user.sexo)
+
     this.setState({nombre: user.nombre, apellido: user.apellido, email: user.email, sexo: (user.sexo === 'NONE' ? 'other' : user.sexo)})
   }
 

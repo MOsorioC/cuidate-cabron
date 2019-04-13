@@ -170,7 +170,7 @@ class HeatMap extends Component {
       map.addLayer(this._mkHeatmapLayerPoint(HEATMAP_SOURCE_ID), 'waterway-label');
     }).catch(error => {
       console.log(error)
-    })    
+    })
     
   }
 

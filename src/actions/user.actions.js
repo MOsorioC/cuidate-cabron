@@ -30,7 +30,6 @@ function signup(nombre, apellido, email, password) {
     dispatch(request({ email }))
     
     UserService.signup(nombre, apellido, email, password).then(user => {
-      console.log(success)
       dispatch(success(user))
     }).catch(err => {
       dispatch(failure(err))
