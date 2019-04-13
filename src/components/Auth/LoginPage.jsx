@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom'
 import { userConstants } from '../../constants'
 import MySnackbarContent from '../MySnackbarContent'
 import Paper from '@material-ui/core/Paper'
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
     container: {
@@ -133,10 +134,17 @@ class LoginPage extends React.Component {
                                 </Grid>
                             </Grid>
                             <Grid container alignItems="center" justify="center">
-                                    <Grid item lg={6} xs={12}>
+                                <Grid item lg={6} xs={12}>
                                     <Button variant="contained" color="primary" className={classes.button} type="submit">
                                         Acceder
                                     </Button>
+                                </Grid>
+                                <Grid item lg={12} xs={12}>
+                                    <Link to={'/signup'}>
+                                        <Typography variant="h7" align="center" color="primary" paragraph>
+                                            ¿no tienes cuenta? regístrate
+                                        </Typography>
+                                    </Link>
                                 </Grid>
                             </Grid>
                             {this._renderMessage()}

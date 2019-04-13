@@ -120,7 +120,7 @@ class NavBar extends Component {
             </IconButton>)}
             <Link to={'/'} className={classes.grow}>
               <Typography variant="h6" color="inherit" noWrap>
-                Cuídate Cabron
+                Cuídate Cabrón
               </Typography>
             </Link>
             {localStorage.getItem('user') ? <div></div> : <Button href="/login" color="inherit">Login</Button>}

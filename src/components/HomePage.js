@@ -78,7 +78,7 @@ function HomePage(props) {
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
             <Typography variant="h3" align="left">
-              CUIDATE CABRON
+              CUÍDATE CABRÓN
             </Typography>
             <Typography variant="h5" align="left" color="textSecondary" paragraph>
               No sabemos cuando será nuestra última fotografía o nuestra última sonrisa.
@@ -110,7 +110,7 @@ function HomePage(props) {
       </main>
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Cuidate Cabron
+          Cuídate Cabrón
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           Por que la vida no la tenemos comprada!
