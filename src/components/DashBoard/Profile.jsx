@@ -136,7 +136,7 @@ class Profile extends Component {
     UserService.update(body).then(response => {
       localStorage.setItem('user', JSON.stringify(body));
       dispatch({ type: userConstants.LOGIN_SUCCESS,  user: body})
-      this.setState({ error: false, message: response.message, success: true, edit: false })
+      this.setState({ error: false, message: response.message, success: true, edit: false, password: '', passwordConfirm: '' })
     }).catch(err => {
       this.setState({error: true, message: err.message, succes:false})
     })
