@@ -6,6 +6,7 @@ import { userActions } from '../../actions/user.actions'
 import { Redirect } from 'react-router-dom'
 import { userConstants } from '../../constants'
 import MySnackbarContent from '../MySnackbarContent'
+import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
     container: {
@@ -27,6 +28,13 @@ const styles = theme => ({
     margin: {
         margin: theme.spacing.unit,
     },
+    paper: {
+        marginTop: theme.spacing.unit * 3,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    }
 });
 
 class LoginPage extends React.Component {
@@ -88,12 +96,13 @@ class LoginPage extends React.Component {
                 <LinearProgress color="secondary"/>}
                 <form name="form" onSubmit={this.handleSubmit} className={classes.container}>
                     <Grid container spacing={8} justify="center" alignItems="center">
-                        <Typography variant="h3" align="center" color="textSecondary" paragraph>
+                        <Paper className={classes.paper}>
+                        <Typography variant="h3" align="center" color="textSecondary">
                             Inicia Sesión
                         </Typography>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} lg={12}>
                             <Grid container spacing={8} alignItems="center" justify="center">
-                                <Grid item lg={5}>
+                                <Grid item lg={12} xs={12}>
                                     <TextField
                                         required
                                         id="email"
@@ -108,7 +117,7 @@ class LoginPage extends React.Component {
                                 </Grid>
                             </Grid>
                             <Grid container spacing={8} alignItems="center" justify="center">
-                                <Grid item lg={5}>
+                                <Grid item lg={12} xs={12}>
                                     <TextField
                                         required
                                         id="password"
@@ -119,11 +128,12 @@ class LoginPage extends React.Component {
                                         type="password"
                                         margin="normal"
                                         variant="outlined"
+                                        helperText="Debe contener al menos 8 digitos, 1 Mayúscula, 1 número y 1 caracter especial"
                                     />
                                 </Grid>
                             </Grid>
                             <Grid container alignItems="center" justify="center">
-                                <Grid item lg={6}>
+                                    <Grid item lg={6} xs={12}>
                                     <Button variant="contained" color="primary" className={classes.button} type="submit">
                                         Acceder
                                     </Button>
@@ -131,7 +141,7 @@ class LoginPage extends React.Component {
                             </Grid>
                             {this._renderMessage()}
                         </Grid>
-                        
+                        </Paper>
                     </Grid>
 
                 </form>

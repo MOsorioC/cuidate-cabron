@@ -278,6 +278,7 @@ class NewReport extends Component {
                 onChange={this.handleChange('descripcion')}
                 margin="normal"
                 variant="outlined"
+                helperText="La descripción debe tener al menos 50 caracteres"
                 multiline />
 
               <TextField

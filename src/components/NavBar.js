@@ -10,6 +10,7 @@ import AddLocationIcon from '@material-ui/icons/AddLocation'
 import MapIcon from '@material-ui/icons/Map'
 import PlaceIcon from '@material-ui/icons/Place'
 import { userActions } from '../actions/'
+import { Link } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -47,9 +48,6 @@ class NavBar extends Component {
     window.location = '/'
   }
 
-  _goHome = () => {
-    window.location = '/'
-  }
 
   _goToProfile = () => {
     window.location = '/user/dashboard/profile'
@@ -120,9 +118,11 @@ class NavBar extends Component {
             {localStorage.getItem('user') && (<IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer('left', true)}>
               <MenuIcon />
             </IconButton>)}
-            <Typography className={classes.grow} variant="h6" color="inherit" noWrap onClick={this._goHome}>
-              Cuídate Cabron
-            </Typography>
+            <Link to={'/'} className={classes.grow}>
+              <Typography variant="h6" color="inherit" noWrap>
+                Cuídate Cabron
+              </Typography>
+            </Link>
             {localStorage.getItem('user') ? <div></div> : <Button href="/login" color="inherit">Login</Button>}
           </Toolbar>
         </AppBar>
